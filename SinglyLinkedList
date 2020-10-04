@@ -1,0 +1,112 @@
+import java.util.*;
+
+public class Slink{
+    public static void main(String[] args){
+        SinglyLinkedList<Integer> list = new SinglyLinkedList<Integer>();
+        list.addFirst(12);
+        list.addFirst(35);
+        list.addFirst(56);
+         list.addFirst(3);
+        list.addFirst(50);
+        list.addFirst(23);
+         list.addFirst(45);
+         list.addFirst(8);
+        list.addLast(44);
+        
+        System.out.println("Current linked list is : ");
+        list.printList();
+        
+        System.out.println("First node is : " + list.first() );
+         System.out.println("Last node is : " + list.last() );
+         list.removeFirst();
+         
+         System.out.println("After removing the first, the linked list is : ");
+         list.printList();
+         
+         list.findMax();
+    }
+}
+
+class SinglyLinkedList<E>{
+
+   
+    private static class Node<E>{
+        private E element;
+        private Node<E>next;
+       
+        public Node(E e,Node<E>n){
+            element =e;// stores data
+            next = n;
+        }
+        public E getElement(){return element;}
+        public Node<E>getNext(){return next;}
+        public void setNext(Node<E> n){next = n;}
+    }
+    private Node<E> head = null;
+    private Node<E> tail = null;
+    private int size =0;
+    public SinglyLinkedList(){}
+    public int size(){return size;}
+    public boolean isEmpty(){return size ==0;}
+    public E first(){
+        if(isEmpty()) 
+            return null;
+        return head.getElement();
+ }
+     public E last(){
+        if(isEmpty()) 
+            return null;
+        return tail.getElement();
+ }
+   
+    public void addFirst(E e){
+        head = new Node<>(e,head);
+        if(size==0)
+            tail = head;
+        size++;
+        
+    }
+    public void addLast(E e){
+        Node<E> newest = new Node<>(e,null);
+        if(isEmpty())
+            head = newest;
+        else
+            tail.setNext(newest);
+        tail = newest;
+        size++;
+    }
+    public E removeFirst(){
+        if(isEmpty())return null;
+        E answer = head.getElement();
+        head = head.getNext();
+        size--;
+        if(size==0)
+            tail = null;
+        return answer;
+    }
+    public void printList() {
+        Node<E> N = head;
+        while(N!= null){
+            System.out.println(N.getElement());
+            N = N.getNext();
+        }
+    }
+    
+
+    
+    
+    public void findMax(){
+        Node<E> N = head;
+         Node<E> max = head.getNext();
+         
+         
+        if(max != N  ){
+            max = N;
+            System.out.println("This is the max: "+max.getElement());
+        } else {
+        }
+    }
+
+    
+}
+ 
